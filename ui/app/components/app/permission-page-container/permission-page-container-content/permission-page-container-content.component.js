@@ -97,7 +97,6 @@ export default class PermissionPageContainerContent extends PureComponent {
     return (
       <div className="permission-approval-container__content__requested">
         {items}
-        <div className="permission-approval-container__content__revoke-note">{ t('revokeInPermissions') }</div>
       </div>
     )
   }
@@ -159,14 +158,7 @@ export default class PermissionPageContainerContent extends PureComponent {
     } else if (allIdentitiesSelected) {
       return [
         'connectToAll',
-        [
-          <div
-            key="multi-account-connect-all-accounts"
-            className="permission-approval-container__bold-title-elements"
-          >
-            { this.renderAccountTooltip(t('connectToAllAccounts')) }
-          </div>,
-        ],
+        [ this.renderAccountTooltip(t('connectToAllAccounts')) ],
       ]
     } else if (selectedIdentities.length > 1) {
       return [
@@ -178,7 +170,7 @@ export default class PermissionPageContainerContent extends PureComponent {
     } else {
       return [
         'connectTo', [
-          this.renderTitleSubstituteText(this.getAccountDescriptor(selectedIdentities[0]), 'title-substitute-text-account-name'),
+          this.getAccountDescriptor(selectedIdentities[0]),
         ],
       ]
     }
@@ -197,7 +189,7 @@ export default class PermissionPageContainerContent extends PureComponent {
       >
         { !redirect
           ? (
-            <div>
+            <div className="permission-approval-container__content-container">
               <PermissionsConnectHeader
                 icon={domainMetadata.icon}
                 iconName={domainMetadata.name}
